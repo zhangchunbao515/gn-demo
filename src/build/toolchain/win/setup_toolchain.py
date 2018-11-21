@@ -147,6 +147,7 @@ def main():
                              '{sdk_dir}\\Include\\winrt;').format(
                                   sdk_dir=win_sdk_path)
       env['INCLUDE'] = additional_includes + env['INCLUDE']
+
     env_block = _FormatAsEnvironmentBlock(env)
     with open('environment.' + cpu, 'wb') as f:
       f.write(env_block)

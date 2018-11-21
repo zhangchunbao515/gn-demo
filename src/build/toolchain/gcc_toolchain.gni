@@ -210,9 +210,7 @@ template("gcc_toolchain") {
       rspfile = "{{output}}.rsp"
       arflags = ""
       if (is_cfi && invoker.toolchain_os != "nacl") {
-        gold_plugin_path = rebase_path(
-                "//third_party/llvm-build/Release+Asserts/lib/LLVMgold.so",
-                root_build_dir)
+        gold_plugin_path = rebase_path("//third_party/llvm-build/Release+Asserts/lib/LLVMgold.so", root_build_dir)
         arflags = "--plugin $gold_plugin_path"
       }
 
@@ -433,10 +431,9 @@ template("gcc_toolchain") {
 # appropriate -target option, or else it will actually just be doing
 # a native compile.  The invoker can optionally override use_gold too.
 template("clang_toolchain") {
-  assert(defined(invoker.toolchain_cpu),
-         "clang_toolchain() must specify a \"toolchain_cpu\"")
-  assert(defined(invoker.toolchain_os),
-         "clang_toolchain() must specify a \"toolchain_os\"")
+  assert(defined(invoker.toolchain_cpu), "clang_toolchain() must specify a \"toolchain_cpu\"")
+  assert(defined(invoker.toolchain_os), "clang_toolchain() must specify a \"toolchain_os\"")
+
   if (defined(invoker.toolprefix)) {
     toolprefix = invoker.toolprefix
   } else {
@@ -444,8 +441,7 @@ template("clang_toolchain") {
   }
 
   gcc_toolchain(target_name) {
-    prefix = rebase_path("//third_party/llvm-build/Release+Asserts/bin",
-                         root_build_dir)
+    prefix = rebase_path("//third_party/llvm-build/Release+Asserts/bin", root_build_dir)
     cc = "$prefix/clang"
     cxx = "$prefix/clang++"
     ld = cxx

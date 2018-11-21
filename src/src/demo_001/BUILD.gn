@@ -1,5 +1,9 @@
+print("zhangchunbao src/demo_001/BUILD.gn called==========================")
+
 executable("hello_world") {
     sources = [ 
        "main.cpp"
     ]
 }
+
+print("zhangchunbao src/demo_001/BUILD.gn finish==========================")
