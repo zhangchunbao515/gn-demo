@@ -3,10 +3,8 @@
 # found in the LICENSE file.
 print("zhangchunbao build/config/compiler/BUILD.gn called============================")
 
-import("//build/config/android/config.gni")
 import("//build/config/chrome_build.gni")
 import("//build/config/compiler/compiler.gni")
-import("//build/config/nacl/config.gni")
 import("//build/toolchain/ccache.gni")
 
 if (current_cpu == "arm") {
@@ -14,6 +12,9 @@ if (current_cpu == "arm") {
 }
 if (current_cpu == "mipsel" || current_cpu == "mips64el") {
   import("//build/config/mips.gni")
+}
+if (is_android) {
+  import("//build/config/android/config.gni")
 }
 if (is_posix) {
   import("//build/config/gcc/gcc_version.gni")
@@ -1142,11 +1143,7 @@ config("optimize_max") {
 # The default optimization applied to all targets. This will be equivalent to
 # either "optimize" or "no_optimize", depending on the build flags.
 config("default_optimization") {
-  if (is_nacl_irt) {
-    # The NaCl IRT is a special case and always wants its own config.
-    # It gets optimized the same way regardless of the type of build.
-    configs = [ "//build/config/nacl:irt_optimize" ]
-  } else if (is_debug) {
+  if (is_debug) {
     configs = [ ":no_optimize" ]
   } else {
     configs = [ ":optimize" ]
